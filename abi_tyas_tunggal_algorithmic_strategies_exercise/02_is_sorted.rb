@@ -3,14 +3,7 @@
 # Do not use the built-in Array#sort in your solution :)
 
 def is_sorted(arr)
-  largest = arr.inject do |smallest, el|
-      if smallest > el
-          smallest
-      else
-          el
-      end
-  end
-  largest == arr[-1]
+  (0...arr.length - 1).all? {|i| arr[i] <= arr[i+1] }
 end
 
 
