@@ -4,18 +4,18 @@
 # Do not use the built-in Array#sort
 
 def bubble_sort(arr)
-    sorted = false
+  sorted = false
 
-    while !sorted
-        sorted = true
-        (0..arr.length-2).each do |i|
-            if arr[i] > arr[i+1]
-                arr[i], arr[i+1] = arr[i+1], arr[i]
-                sorted = false
-            end
-        end
-    end
-    return arr
+  while !sorted
+      sorted = true
+      (0..arr.length-2).each do |i|
+          if arr[i] > arr[i+1]
+              arr[i], arr[i+1] = arr[i+1], arr[i]
+              sorted = false
+          end
+      end
+  end
+  arr
 end
 
 
