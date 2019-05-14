@@ -2,8 +2,8 @@
 # The method should return an array containing all elements of the given arrays.
 
 def union(*args)
-    # return args.flatten
-    args.inject { |acc, el| acc + el }
+  # return args.flatten
+  args.inject { |acc, el| acc + el }
 end
 
 p union(["a", "b"], [1, 2, 3]) # => ["a", "b", 1, 2, 3]
