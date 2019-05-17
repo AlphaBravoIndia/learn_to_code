@@ -6,7 +6,7 @@ describe "Part 2:" do
       expect { hipsterfy("tonic") }.to_not raise_error
     end
 
-    it "should return the word with it's last vowel (a, e, i, o, u) removed" do
+    it "should return the word with its last vowel (a, e, i, o, u) removed" do
       expect(hipsterfy("tonic")).to eq("tonc")
       expect(hipsterfy("panther")).to eq("panthr")
       expect(hipsterfy("swimming")).to eq("swimmng")
