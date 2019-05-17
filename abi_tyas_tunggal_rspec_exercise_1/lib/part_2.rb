@@ -5,7 +5,7 @@ end
 
 def hipsterfy(word)
   i = word.length - 1
-  while i > 0
+  while i >= 0
     if vowel?(word[i])
       return word[0...i] + word[i+1..-1]
     end
@@ -21,7 +21,8 @@ def vowel_counts(str)
 end
 
 def caesar_cipher(message, n)
-  alphabet = "abcdefghijklmnopqrstuvwxyz"
+  alphabet = ("a".."z").to_a
+  
   arr = message.split("").map do |char|
     if alphabet.include?(char.downcase)
       new_char = alphabet.index(char) + n
