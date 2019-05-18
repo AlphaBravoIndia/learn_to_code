@@ -39,5 +39,15 @@ def censor(sentence, curse_words)
 end
 
 def power_of_two?(num)
-  
+  if num == 1
+    return true
+  end
+  i = 0
+  while i < num
+    if 2 ** i == num
+      return true
+    end
+    i += 1
+  end
+  false
 end
