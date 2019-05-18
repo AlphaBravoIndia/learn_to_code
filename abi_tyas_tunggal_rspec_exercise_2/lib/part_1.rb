@@ -9,3 +9,10 @@ def partition(arr, num)
   end
   new_arr
 end
+
+def merge(hash1, hash2)
+  hash = {}
+  hash1.each { |key, value| hash[key] = value }
+  hash2.each { |key, value| hash[key] = value }
+  hash
+end
