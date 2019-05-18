@@ -16,3 +16,28 @@ def merge(hash1, hash2)
   hash2.each { |key, value| hash[key] = value }
   hash
 end
+
+def censor(sentence, curse_words)
+  vowels = "aeiou"
+  censored = []
+  sentence.split(" ").each do |word|
+    if curse_words.include?(word.downcase) || curse_words.include?(word.upcase)
+      censored_word = ""
+      word.each_char do |char|
+        if vowels.include?(char.downcase)
+          censored_word += "*"
+        else
+          censored_word += char
+        end
+      end
+      censored << censored_word
+    else
+      censored << word
+    end
+  end
+  censored.join(" ")
+end
+
+def power_of_two?(num)
+  
+end
