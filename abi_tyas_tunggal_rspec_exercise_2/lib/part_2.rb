@@ -4,16 +4,11 @@ def palindrome?(word)
 end
 
 def substrings(word)
-  length = word.length
   arr = []
-  i = 0
-  while i < length
-    j = i
-    while j < length
-      arr << word[i..j]
-      j += 1
+  (0...word.length).each do |start_idx|
+    (start_idx...word.length).each do |end_idx|
+      arr << word[start_idx..end_idx]
     end
-    i += 1
   end
   arr
 end

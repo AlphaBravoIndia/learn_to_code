@@ -18,19 +18,10 @@ def merge(hash1, hash2)
 end
 
 def censor(sentence, curse_words)
-  vowels = "aeiou"
   censored = []
   sentence.split(" ").each do |word|
     if curse_words.include?(word.downcase) || curse_words.include?(word.upcase)
-      censored_word = ""
-      word.each_char do |char|
-        if vowels.include?(char.downcase)
-          censored_word += "*"
-        else
-          censored_word += char
-        end
-      end
-      censored << censored_word
+      censored << star_vowels(word)
     else
       censored << word
     end
@@ -38,16 +29,25 @@ def censor(sentence, curse_words)
   censored.join(" ")
 end
 
-def power_of_two?(num)
-  if num == 1
-    return true
-  end
-  i = 0
-  while i < num
-    if 2 ** i == num
-      return true
+def star_vowels(word)
+  vowels = "aeiou"
+  censored_word = ""
+  word.each_char do |char|
+    if vowels.include?(char.downcase)
+      censored_word += "*"
+    else
+      censored_word += char
     end
-    i += 1
   end
-  false
+  censored_word
+end
+
+def power_of_two?(num)
+  product = 1
+
+  while product < num
+    product *= 2
+  end
+
+  product == num
 end
