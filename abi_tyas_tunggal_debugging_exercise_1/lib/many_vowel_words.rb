@@ -6,19 +6,19 @@
 require "byebug"
 
 def many_vowel_words(sentence)
-    words = sentence.split(" ")
+  words = sentence.split(" ")
 
-    new_words = words.select do |word|
-        num_vowels(word) >= 2
-    end
+  new_words = words.select do |word|
+      num_vowels(word) >= 2
+  end
 
-    new_words.join(" ")
+  new_words.join(" ")
 end
 
 def num_vowels(word)
-    count = 0
-    word.each_char do |char|
-        count += 1 if "aeiou".include?(char)
-    end
-    count
+  count = 0
+  word.each_char do |char|
+      count += 1 if "aeiou".include?(char)
+  end
+  count
 end
