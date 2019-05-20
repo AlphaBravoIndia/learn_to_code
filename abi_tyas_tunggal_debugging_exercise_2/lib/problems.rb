@@ -28,3 +28,9 @@ def unique_chars?(string)
   count.each { |k, v| return false if count[k] > 1 }
   true
 end
+
+def dupe_indices(array)
+  dupe_indices = Hash.new { |h,k| h[k] = [] }
+  array.each_with_index { |ele, i| dupe_indices[ele] << i }
+  dupe_indices.select! { |k,v| v.length > 1 }
+end
