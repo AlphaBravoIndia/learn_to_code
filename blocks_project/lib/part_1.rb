@@ -1,25 +1,27 @@
-def select_even_nums(array)
-  array.select(&:even?)
+def select_even_nums(numbers)
+  numbers.select(&:even?)
 end
 
 def reject_puppies(dogs)
-  dogs.reject { |dog| dog["age"] <= 2 }
+  dogs.reject { |dog| dog["age"] < 3 }
 end
 
-def count_positive_subarrays(array)
-  array.count { |subarray| subarray.sum > 0 }
+def count_positive_subarrays(arrays)
+  arrays.count { |subarray| subarray.sum > 0 }
 end
 
-def aba_translate(string)
-  new_string = ""
-  string.each_char do |char|
+def aba_translate(word)
+  new_word = ""
+  
+  word.each_char do |char|
     if "aeiou".include?(char)
-      new_string += char + "b" + char
+      new_word += char + "b" + char
     else
-      new_string += char
+      new_word += char
     end
   end
-  new_string
+
+  new_word
 end
 
 def aba_array(words)
