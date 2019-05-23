@@ -31,9 +31,9 @@ class Bootcamp
   def enroll(student)
     if @students.length < @student_capacity
       @students << student
-      true
+      return true
     else
-      false
+      return false
     end
   end
 
@@ -48,9 +48,9 @@ class Bootcamp
   def add_grade(student, grade)
     if enrolled?(student)
       @grades[student] << grade
-      true
+      return true
     else
-      false
+      return false
     end
   end
 
@@ -59,10 +59,7 @@ class Bootcamp
   end
 
   def average_grade(student)
-    if enrolled?(student) && num_grades(student) > 0
-      @grades[student].sum/num_grades(student)
-    else
-      nil
-    end
+    return nil if !self.enrolled?(student) || num_grades(student).zero?
+    @grades[student].sum / self.num_grades(student)
   end
 end
