@@ -1,23 +1,23 @@
 # Monkey-Patch Ruby's existing Array class to add your own custom methods
 class Array
   def span
-    return nil if self.length == 0
+    return nil if self.empty?
     self.max - self.min
   end
 
   def average
-    return nil if self.length == 0
+    return nil if self.empty?
     self.sum / self.length.to_f
   end
 
   def median
-    return nil if self.length == 0
+    return nil if self.empty?
     sorted = self.sort
-    length = sorted.length
-    if length.odd?
-      return sorted[length/2]
+    mid_index = self.length / 2
+    if self.length.odd?
+      return sorted[mid_index]
     else
-      return (sorted[length/2-1] + sorted[length/2]) / 2.0
+      return (sorted[mid_index-1] + sorted[mid_index]) / 2.0
     end
   end
 
@@ -35,21 +35,23 @@ class Array
 
   def my_index(value)
     self.each_with_index { |el, i| return i if el == value }
-    return nil
+    nil
   end
 
   def my_uniq
-    uniques = []
-    self.each { |el| uniques << el if !uniques.include?(el) }
-    uniques
+    elements = {}
+    self.each { |el| elements[el] = true }
+    elements.keys
   end
 
   def my_transpose
-    transposed = Array.new(self.length) { Array.new(self.length) }
+    transposed = []
     self.each_with_index do |subarray, idx1|
+      row = []
       subarray.each_with_index do |el, idx2|
-        transposed[idx2][idx1] = el
+        row << self[idx2][idx1]
       end
+      transposed << row
     end
     transposed
   end
