@@ -19,8 +19,8 @@ class Dog
     @age
   end
 
-  def age=(age)
-    @age = age
+  def age=(new_age)
+    @age = new_age
   end
 
   def bark
@@ -36,6 +36,6 @@ class Dog
   end
 
   def favorite_food?(food)
-    @favorite_foods.any? { |food1| food1 == food.downcase || food1 == food.upcase || food1 == food.capitalize }
+    @favorite_food.map(&:downcase).include?(food.downcase)
   end
 end
