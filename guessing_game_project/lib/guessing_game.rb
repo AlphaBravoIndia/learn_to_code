@@ -26,8 +26,7 @@ class GuessingGame
   end
 
   def ask_user
-    p "enter a number"
-    number = gets.chomp.to_i
-    check_num(number)
+    p "enter a number: "
+    check_num(gets.chomp.to_i)
   end
 end
