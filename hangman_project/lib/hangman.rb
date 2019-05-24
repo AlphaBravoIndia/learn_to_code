@@ -46,13 +46,12 @@ class Hangman
     if already_attempted?(char)
       puts "that has already been attempted"
       return false
-    else
-      indices = get_matching_indices(char)
-      @remaining_incorrect_guesses -= 1 if indices.empty?
-      fill_indices(char, indices)
-      @attempted_chars << char
-      return true
     end
+    indices = self.get_matching_indices(char)
+    @remaining_incorrect_guesses -= 1 if indices.empty?
+    self.fill_indices(char, indices)
+    @attempted_chars << char
+    true
   end
 
   def ask_user_for_guess
@@ -79,7 +78,7 @@ class Hangman
   end
 
   def game_over?
-    if win? || lose?
+    if self.win? || self.lose?
       puts @secret_word
       return true
     else
