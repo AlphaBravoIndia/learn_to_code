@@ -1,6 +1,12 @@
 class Board
   attr_reader :size
 
+  def self.print_grid(grid)
+    grid.each do |row|
+      puts row.join(" ")
+    end
+  end
+
   def initialize(n)
     @grid = Array.new(n) { Array.new(n, :N) }
     @size = n * n
@@ -33,7 +39,7 @@ class Board
 
   def place_random_ships
     while self.num_ships != self.size/4
-      position = [rand(Integer.sqrt(self.size)), rand(Integer.sqrt(self.size))]
+      position = [rand(0...@grid.length), rand(0...@grid.length)]
       self[position] = :S
     end
   end
@@ -42,19 +48,11 @@ class Board
     @grid.map do |row|
       row.map do |el|
         if el == :S
-          el = :N
+          :N
         else
           el
         end
       end
-    end
-  end
-
-  def self.print_grid(grid)
-    grid.each do |row|
-      line = ""
-      row.each { |el| line += "#{el} "}
-      puts line.strip
     end
   end
 
@@ -63,6 +61,6 @@ class Board
   end
 
   def print
-    Board.print_grid(hidden_ships_grid)
+    Board.print_grid(self.hidden_ships_grid)
   end
 end
