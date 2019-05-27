@@ -11,9 +11,9 @@ class Battleship
   end
 
   def start_game
-    self.board.place_random_ships
+    @board.place_random_ships
     puts "#{@board.num_ships} ships placed on the board."
-    self.board.print
+    @board.print
   end
 
   def lose?
@@ -26,7 +26,7 @@ class Battleship
   end
 
   def win?
-    if self.board.num_ships == 0
+    if @board.num_ships == 0
       puts "you win"
       return true
     else
@@ -46,7 +46,7 @@ class Battleship
     if !@board.attack(@player.get_move)
       @remaining_misses -= 1
     end
-    self.board.print
+    @board.print
     puts "#{@remaining_misses} misses left."
   end
 end
