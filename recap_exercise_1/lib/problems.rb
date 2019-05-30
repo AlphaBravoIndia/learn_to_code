@@ -6,7 +6,18 @@
 #
 # all_vowel_pairs(["goat", "action", "tear", "impromptu", "tired", "europe"])   # => ["action europe", "tear impromptu"]
 def all_vowel_pairs(words)
-
+  pairs = []
+  words.each_with_index do |word1, idx1|
+    words.each_with_index do |word2, idx2|
+      if idx1 < idx2
+        vowel_count = { "a"=>0, "e"=>0, "i"=>0, "o"=>0, "u"=>0 }
+        pair = word1 + " " + word2
+        pair.each_char { |char| vowel_count[char] += 1 if vowel_count.keys.include?(char) }
+        pairs << pair if !vowel_count.values.include?(0)
+      end
+    end
+  end
+  pairs
 end
 
 
@@ -18,7 +29,9 @@ end
 # composite?(9)     # => true
 # composite?(13)    # => false
 def composite?(num)
-
+  return false if num < 2
+  (2..num/2).each { |n| return true if num % n == 0 }
+  false
 end
 
 
@@ -32,7 +45,7 @@ end
 # find_bigrams("the theater is empty", ["cy", "em", "ty", "ea", "oo"])  # => ["em", "ty", "ea"]
 # find_bigrams("to the moon and back", ["ck", "oo", "ha", "at"])        # => ["ck", "oo"]
 def find_bigrams(str, bigrams)
-
+  bigrams.select { |ele| str.include?(ele) }
 end
 
 class Hash
@@ -50,7 +63,10 @@ class Hash
     # hash_2.my_select { |k, v| k + 1 == v }      # => {10=>11, 5=>6, 7=>8})
     # hash_2.my_select                            # => {4=>4}
     def my_select(&prc)
-
+      prc ||= Proc.new { |k, v| k == v }
+      new_hash = {}
+      self.each { |k, v| new_hash[k] = v if prc.call(k, v) }
+      new_hash
     end
 end
 
@@ -64,7 +80,18 @@ class String
     # "cats".substrings     # => ["c", "ca", "cat", "cats", "a", "at", "ats", "t", "ts", "s"]
     # "cats".substrings(2)  # => ["ca", "at", "ts"]
     def substrings(length = nil)
-
+      length ||= false
+      substrings = []
+      self.each_char.with_index do |char1, idx1|
+        str = char1
+        self.each_char.with_index do |char2, idx2|
+          if idx2 > idx1
+            str += char2
+          end
+          substrings << str if str.length == length || !length && !substrings.include?(str)
+        end
+      end
+      substrings
     end
 
 
@@ -78,6 +105,9 @@ class String
     # "bootcamp".caesar_cipher(2) #=> "dqqvecor"
     # "zebra".caesar_cipher(4)    #=> "difve"
     def caesar_cipher(num)
-
+      alphabet = "abcdefghijklmnopqrstuvwxyz"
+      new_string = ""
+      self.each_char { |char| new_string += alphabet[(alphabet.index(char) + num) % 26] }
+      new_string
     end
 end
