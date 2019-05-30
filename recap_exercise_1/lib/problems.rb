@@ -7,14 +7,11 @@
 # all_vowel_pairs(["goat", "action", "tear", "impromptu", "tired", "europe"])   # => ["action europe", "tear impromptu"]
 def all_vowel_pairs(words)
   pairs = []
+  vowels = ["a", "e", "i", "o", "u"]
   words.each_with_index do |word1, idx1|
     words.each_with_index do |word2, idx2|
-      if idx1 < idx2
-        vowel_count = { "a"=>0, "e"=>0, "i"=>0, "o"=>0, "u"=>0 }
-        pair = word1 + " " + word2
-        pair.each_char { |char| vowel_count[char] += 1 if vowel_count.keys.include?(char) }
-        pairs << pair if !vowel_count.values.include?(0)
-      end
+      pair = word1 + " " + word2
+      pairs << pair if idx1 < idx2 && vowels.all? { |vowel| pair.include?(vowel) }
     end
   end
   pairs
@@ -82,13 +79,10 @@ class String
     def substrings(length = nil)
       length ||= false
       substrings = []
-      self.each_char.with_index do |char1, idx1|
-        str = char1
-        self.each_char.with_index do |char2, idx2|
-          if idx2 > idx1
-            str += char2
-          end
-          substrings << str if str.length == length || !length && !substrings.include?(str)
+      (0...self.length).each do |start_idx|
+        (start_idx...self.length).each do |end_index|
+          sub = self[start_idx..end_index]
+          substrings << sub if sub.length == length || !length
         end
       end
       substrings
@@ -105,7 +99,7 @@ class String
     # "bootcamp".caesar_cipher(2) #=> "dqqvecor"
     # "zebra".caesar_cipher(4)    #=> "difve"
     def caesar_cipher(num)
-      alphabet = "abcdefghijklmnopqrstuvwxyz"
+      alphabet = ("a".."z").to_a
       new_string = ""
       self.each_char { |char| new_string += alphabet[(alphabet.index(char) + num) % 26] }
       new_string
