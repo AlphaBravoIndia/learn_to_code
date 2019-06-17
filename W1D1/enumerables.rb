@@ -57,17 +57,42 @@ class Array
     flatten
   end
 
-  def my_zip(*args)
-    array = Array.new(self.length) { Array.new(args.length + 1) }
-    inputs = [self] + args
-    inputs.length.times do |i|
-      current = inputs[i]
-      current.length.times do |j|
-        array[j][i] = current[j]
-      end
-    end
-    p inputs
+  def my_zip(*arrays)
+    zipped = []
+    
+    self.length.times do |i|
+      subzip = [self[i]]
 
-    array
+      arrays.my_each do |array|
+        subzip << array[i]
+      end
+
+      zipped << subzip
+    end
+
+    zipped
+  end
+
+  def my_rotate(number=1)
+    rotated = Array.new(self.length)
+
+    self.my_each do |el|
+      current_index = self.index(el)
+      new_index = (current_index - number) % self.length
+      rotated[new_index] = el
+    end
+
+    rotated
+  end
+
+  def my_join(seperator="")
+    joined = ""
+
+    self.length.times do |i|
+      joined += self[i]
+      joined += seperator unless i == length - 1
+    end
+
+    joined
   end
 end
