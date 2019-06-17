@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Array
   def my_each(&prc)
     self.length.times do |i|
@@ -53,5 +55,19 @@ class Array
     end
     
     flatten
+  end
+
+  def my_zip(*args)
+    array = Array.new(self.length) { Array.new(args.length + 1) }
+    inputs = [self] + args
+    inputs.length.times do |i|
+      current = inputs[i]
+      current.length.times do |j|
+        array[j][i] = current[j]
+      end
+    end
+    p inputs
+
+    array
   end
 end
