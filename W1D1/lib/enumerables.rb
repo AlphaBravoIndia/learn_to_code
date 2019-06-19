@@ -95,4 +95,27 @@ class Array
 
     joined
   end
+
+  def my_reverse
+    reverse = []
+
+    self.my_each do |el|
+      reverse.unshift(el)
+    end
+
+    reverse
+  end
 end
+
+def factors(num)
+  factors = []
+  
+  (1...num).each do |factor|
+    if num % factor == 0 
+      factors << factor
+    end
+  end
+
+  factors
+end
+
